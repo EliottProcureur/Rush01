@@ -17,7 +17,6 @@ int visible_count(int *sol)
 }
 
 /*
-
     Cette fonction compte combien de nombres sont visibles en partant du début d'une ligne ou colonne. Elle prend en paramètre 
     un tableau de 4 entiers représentant une ligne ou une colonne et retourne le nombre de batiments visibles.
     Exemple :
