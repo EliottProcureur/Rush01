@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   grid.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejacque <sejacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sejacque <sejacque@student.42belgium.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 23:42:18 by sejacque          #+#    #+#             */
-/*   Updated: 2026/08/15 20:58:31 by sejacque         ###   ########.fr       */
+/*   Updated: 2026/08/16 18:24:50 by sejacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-#define SIZE 6
-#define INNER 4
+#define MAX_SIZE 11
 
-void	ft_init_grid(int grid[SIZE][SIZE], int *clues)
+void	ft_init_grid(int grid[MAX_SIZE][MAX_SIZE], int *clues, int inner)
 {
 	int	row;
 	int	col;
 
 	row = 0;
-	while (row < SIZE)
+	while (row < MAX_SIZE)
 	{
 		col = 0;
-		while (col < SIZE)
+		while (col < MAX_SIZE)
 		{
 			grid[row][col] = 0;
 			col++;
@@ -32,31 +31,31 @@ void	ft_init_grid(int grid[SIZE][SIZE], int *clues)
 		row++;
 	}
 	col = 0;
-	while (col < INNER)
+	while (col < inner)
 	{
 		grid[0][col + 1] = clues[col];
-		grid[5][col + 1] = clues[col + 4];
-		grid[col + 1][0] = clues[col + 8];
-		grid[col + 1][5] = clues[col + 12];
+		grid[inner + 1][col + 1] = clues[inner + col];
+		grid[col + 1][0] = clues[2 * inner + col];
+		grid[col + 1][inner + 1] = clues[3 * inner + col];
 		col++;
 	}
 }
 
-void	ft_print_grid(int grid[SIZE][SIZE])
+void	ft_print_grid(int grid[MAX_SIZE][MAX_SIZE], int inner)
 {
 	char	num;
 	int		row;
 	int		col;
 
 	row = 1;
-	while (row <= INNER)
+	while (row <= inner)
 	{
 		col = 1;
-		while (col <= INNER)
+		while (col <= inner)
 		{
 			num = grid[row][col] + '0';
 			write(1, &num, 1);
-			if (col < INNER)
+			if (col < inner)
 				write(1, " ", 1);
 			col++;
 		}

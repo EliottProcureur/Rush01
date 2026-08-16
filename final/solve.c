@@ -3,50 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejacque <sejacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sejacque <sejacque@student.42belgium.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 11:28:54 by sejacque          #+#    #+#             */
-/*   Updated: 2026/08/15 21:02:30 by sejacque         ###   ########.fr       */
+/*   Updated: 2026/08/16 18:29:06 by sejacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define SIZE 6
-#define INNER 4
+#define MAX_SIZE 11
 
-int	ft_check_views(int grid[SIZE][SIZE]);
+int	ft_check_views(int grid[MAX_SIZE][MAX_SIZE], int inner);
 
-int	ft_can_place(int grid[SIZE][SIZE], int row, int col, int num)
+int	ft_can_place(int grid[MAX_SIZE][MAX_SIZE], int row, int col, int inner)
 {
 	int	i;
+	int	num;
 
+	num = grid[row][col];
 	i = 1;
-	while (i <= INNER)
+	while (i <= inner)
 	{
-		if (grid[row][i] == num || grid[i][col] == num)
+		if ((i != col && grid[row][i] == num)
+			|| (i != row && grid[i][col] == num))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	ft_solve(int grid[SIZE][SIZE], int row, int col)
+int	ft_solve(int grid[MAX_SIZE][MAX_SIZE], int row, int col, int inner)
 {
 	int	num;
 
-	if (row == 5)
-		return (ft_check_views(grid));
-	if (col == 5)
-		return (ft_solve(grid, row + 1, 1));
+	if (row == inner + 1)
+		return (ft_check_views(grid, inner));
+	if (col == inner + 1)
+		return (ft_solve(grid, row + 1, 1, inner));
 	num = 1;
-	while (num <= INNER)
+	while (num <= inner)
 	{
-		if (ft_can_place(grid, row, col, num))
+		grid[row][col] = num;
+		if (ft_can_place(grid, row, col, inner))
 		{
-			grid[row][col] = num;
-			if (ft_solve(grid, row, col + 1))
+			if (ft_solve(grid, row, col + 1, inner))
 				return (1);
-			grid[row][col] = 0;
 		}
+		grid[row][col] = 0;
 		num++;
 	}
 	return (0);
