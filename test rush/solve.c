@@ -6,7 +6,7 @@
 /*   By: elprocur <elprocur@student.42belgium.be    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 11:28:54 by sejacque          #+#    #+#             */
-/*   Updated: 2026/08/16 16:26:59 by elprocur         ###   ########.fr       */
+/*   Updated: 2026/08/16 16:54:30 by elprocur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 
 int	ft_check_views(int grid[MAX_SIZE][MAX_SIZE], int inner);
 
-int	ft_can_place(int grid[MAX_SIZE][MAX_SIZE], int row, int col, int num,
-	int inner)
+int	ft_can_place(int grid[MAX_SIZE][MAX_SIZE], int pos[2], int num, int inner)
 {
 	int	i;
 
 	i = 1;
 	while (i <= inner)
 	{
-		if (grid[row][i] == num || grid[i][col] == num)
+		if (grid[pos[0]][i] == num || grid[i][pos[1]] == num)
 			return (0);
 		i++;
 	}
@@ -40,7 +39,10 @@ int	ft_can_place(int grid[MAX_SIZE][MAX_SIZE], int row, int col, int num,
 int	ft_solve(int grid[MAX_SIZE][MAX_SIZE], int row, int col, int inner)
 {
 	int	num;
+	int	pos[2];
 
+	pos[0] = row;
+	pos[1] = col;
 	if (row == inner + 1)
 		return (ft_check_views(grid, inner));
 	if (col == inner + 1)
@@ -48,7 +50,7 @@ int	ft_solve(int grid[MAX_SIZE][MAX_SIZE], int row, int col, int inner)
 	num = 1;
 	while (num <= inner)
 	{
-		if (ft_can_place(grid, row, col, num, inner))
+		if (ft_can_place(grid, pos, num, inner))
 		{
 			grid[row][col] = num;
 			if (ft_solve(grid, row, col + 1, inner))
