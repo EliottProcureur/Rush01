@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   views.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejacque <sejacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sejacque <sejacque@student.42belgium.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 12:06:21 by sejacque          #+#    #+#             */
-/*   Updated: 2026/08/15 21:03:07 by sejacque         ###   ########.fr       */
+/*   Updated: 2026/08/16 15:52:19 by sejacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	ft_count_down(int **grid, int size, int col)
 	return (visible);
 }
 
-int	ft_check_views(int **grid, int size)
+int	ft_check_all_views(int **grid, int size)
 {
 	int	index;
 

@@ -6,11 +6,11 @@
 /*   By: sejacque <sejacque@student.42belgium.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 11:28:54 by sejacque          #+#    #+#             */
-/*   Updated: 2026/08/16 15:52:01 by sejacque         ###   ########.fr       */
+/*   Updated: 2026/08/16 15:52:38 by sejacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_check_views(int **grid, int size);
+int	ft_check_all_views(int **grid, int size);
 int	ft_count_left(int **grid, int size, int row);
 int	ft_count_up(int **grid, int size, int col);
 
@@ -47,7 +47,7 @@ int	ft_solve(int **grid, int size, int row, int col)
 	int	num;
 
 	if (row == size + 1)
-		return (ft_check_views(grid, size));
+		return (ft_check_all_views(grid, size));
 	if (col == size + 1)
 		return (ft_solve(grid, size, row + 1, 1));
 	num = 1;
