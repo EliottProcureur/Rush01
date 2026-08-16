@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejacque <sejacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sejacque <sejacque@student.42belgium.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 11:28:54 by sejacque          #+#    #+#             */
-/*   Updated: 2026/08/15 21:02:30 by sejacque         ###   ########.fr       */
+/*   Updated: 2026/08/16 15:52:01 by sejacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int	ft_can_place(int **grid, int size, int row, int col)
 	i = 1;
 	while (i <= size)
 	{
-		if ((i != col && grid[row][i] == grid[row][col])
-			|| (i != row && grid[i][col] == grid[row][col]))
+		if ((i != col && grid[row][i] == grid[row][col]) || (i != row
+				&& grid[i][col] == grid[row][col]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	ft_partial_views_ok(int **grid, int size, int row, int col)
+int	ft_check_partial_views(int **grid, int size, int row, int col)
 {
 	int	visible;
 
@@ -56,8 +56,8 @@ int	ft_solve(int **grid, int size, int row, int col)
 		grid[row][col] = num;
 		if (ft_can_place(grid, size, row, col))
 		{
-			if (ft_partial_views_ok(grid, size, row, col)
-				&& ft_solve(grid, size, row, col + 1))
+			if (ft_check_partial_views(grid, size, row, col) && ft_solve(grid,
+					size, row, col + 1))
 				return (1);
 		}
 		grid[row][col] = 0;
